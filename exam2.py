@@ -3,22 +3,18 @@ print("""
 При нечетном количестве элементов последний сохранить на своем месте. Для заполнения списка элементов необходимо использовать функцию input().
 """)
 
-while True:
-    i_max = input('Введите количество элементов списка\n')
-    if i_max.isdigit():
-        break
-    else:
-        print('Введено некорректное значение. Повторите ввод\n')
-
 list_input = []
 while True:
-    var_input = input(f'Введите значение {len(list_input)+1} из ({i_max})\n')
+    var_input = input(
+        'Введите произвольное значение. (Для завершения введите слово end)\n')
     if not var_input == "":
-        list_input.append(var_input)
-        if len(list_input) == int(i_max):
+        if var_input == "end":
             break
+        list_input.append(var_input)
     else:
         print('Введено пустое значение. Повторите ввод\n')
+
+print(f"Введенные значения: {list_input}")
 
 list_sorted = []
 for i in range(0, len(list_input)):

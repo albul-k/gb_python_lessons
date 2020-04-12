@@ -27,4 +27,4 @@ dict_month = {
     12: list_month[0],
 }
 
-print(dict_month[int(num)])
+print(f"Время года: {dict_month[int(num)]}")
