@@ -15,11 +15,11 @@ def division(a: int, b: int) -> float:
         float -- [description]
     """
     try:
-        c = a/b
-    except ZeroDivisionError:
-        print('Деление на ноль запрещено')
+        return a / b
+    except TypeError:
         return None
-    return c
+    except ZeroDivisionError:
+        return None
 
 
 a, b = input('Введите два числа через пробел\n').split()
