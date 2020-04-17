@@ -14,9 +14,12 @@ def my_func(a: int, b: int, c: int) -> int:
     Returns:
         int -- сумма 2-х наибольших чисел
     """
-    num_max = max(a, b, c)
-    num_medium = (a + b + c) - (num_max + min(a, b, c))
-    return num_max + num_medium
+    try:
+        num_max = max(a, b, c)
+        num_medium = (a + b + c) - (num_max + min(a, b, c))
+        return num_max + num_medium
+    except TypeError:
+        return None
 
 
 num_list = input('Введите три целых числа через пробел\n').split()

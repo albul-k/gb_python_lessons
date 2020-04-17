@@ -5,7 +5,7 @@ print("""
 
 
 def user_info(first_name: str, second_name: str, birthdate: str, current_city: str, email: str, phone_number: str) -> str:
-    """[summary]
+    """Функция возвращает данные пользователя в строку
 
     Arguments:
         first_name {str} -- Имя
