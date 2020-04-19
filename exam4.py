@@ -6,11 +6,13 @@
 
 import my_module.my_func as my_func
 
-my_list = my_func.get_randomint_list(20, 0, 100)
+my_list = my_func.get_randomint_list(30, 0, 10)
+
 print(f'Исходный список:\n{my_list}')
 
-new_list = (
-    itm for itm in my_list if not new_list.count(itm)
-)
+new_list = {}
+new_list = {
+    itm: '' for itm in my_list if not new_list.get(itm)
+}
 
-print(f'Результат:\n{list(new_list)}')
+print(f'Результат:\n{new_list.keys()}')

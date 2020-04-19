@@ -5,6 +5,7 @@
 import my_module.my_func as my_func
 
 my_list = my_func.get_randomint_list(30, 0, 100)
+
 print(f'Исходный список:\n{my_list}')
 
 # пропускаем первый элемент списка
