@@ -6,9 +6,9 @@
 
 file_input = 'exam3_data.txt'
 try:
-    with open(file_input, 'r', encoding='UTF-8') as f:
+    with open(file_input, 'r', encoding='UTF-8') as f_in:
         total_salary, num = 0, 1
-        for line in f:
+        for line in f_in:
             num += 1
             salary = int(line.split('\t')[1])
             total_salary += salary
