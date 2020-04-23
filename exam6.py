@@ -4,13 +4,18 @@
 Сформировать словарь, содержащий название предмета и общее количество занятий по нему. Вывести словарь на экран.
 """
 
+import re
+
 file_input = 'exam6_data.txt'
 
 try:
     with open(file_input, 'r', encoding='UTF-8') as f_in:
-        pass
+        dict_subjects = {}
+        for line in f_in:
+            subject = line.split(':')[0]
+            hours = [int(itm)
+                     for itm in re.findall('\d+', line.split(':')[1])]
+            dict_subjects[subject] = sum(hours)
+        print(dict_subjects)
 except IOError:
-    print("Произошла ошибка записи в файл")
-
-
-# {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
+    print("Произошла ошибка чтения файла")
