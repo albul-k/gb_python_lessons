@@ -7,3 +7,90 @@
 При значении скорости свыше 60 (TownCar) и 40 (WorkCar) должно выводиться сообщение о превышении скорости.
 Создайте экземпляры классов, передайте значения атрибутов. Выполните доступ к атрибутам, выведите результат. Выполните вызов методов и также покажите результат.
 """
+
+
+class Car:
+    speed = 0
+    color = ''
+    name = ''
+    direction = ''
+    is_police = False
+
+    def __init__(self, speed: int, color: str, name: str):
+        self.speed = speed
+        self.color = color
+        self.name = name
+
+    def go(self):
+        return f'машина {self.name} поехала'
+
+    def stop(self):
+        return f'машина {self.name} остановилась'
+
+    def turn(self, direction):
+        self.direction = direction
+        if self.direction == 'left':
+            return f'машина {self.name} повернула налево'
+        else:
+            return f'машина {self.name} повернула направо'
+
+    def show_speed(self, speed):
+        self.speed = speed
+        return self.speed
+
+
+class TownCar(Car):
+
+    def __init__(self, speed, color, name):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        self.is_police = False
+        super().__init__()
+
+    def show_speed(self, speed):
+        self.speed = speed
+        if self.speed > 60:
+            return 'превышение разрешенной скорости'
+        else:
+            return speed
+
+
+class SportCar(Car):
+    def __init__(self, speed, color, name):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        super().__init__()
+
+
+class WorkCar(Car):
+    def __init__(self, speed, color, name):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        super().__init__()
+
+    def show_speed(self, speed):
+        self.speed = speed
+        if self.speed > 40:
+            return 'превышение разрешенной скорости'
+        else:
+            return speed
+
+
+class PoliceCar(Car):
+    def __init__(self, speed, color, name):
+        self.speed = speed
+        self.color = color
+        self.name = name
+        self.is_police = True
+        super().__init__()
+
+
+town_car = TownCar(speed=50, color='white', name='Ford Focus')
+town_car.go()
+town_car.stop()
+# town_car.turn('left')
+town_car.show_speed(55)
+town_car.show_speed(65)
