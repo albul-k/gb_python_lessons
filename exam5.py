@@ -40,14 +40,15 @@ class Handle(Stationery):
         return f'Маркер. Имя={self.title}'
 
 
-stationery = Stationery('def')
-print(stationery.draw())
+if __name__ == '__main__':
+    stationery = Stationery('def')
+    print(stationery.draw())
 
-pen = Pen('Красная ручка')
-print(pen.draw())
+    pen = Pen('Красная ручка')
+    print(pen.draw())
 
-pencil = Pencil('Синий карандаш')
-print(pencil.draw())
+    pencil = Pencil('Синий карандаш')
+    print(pencil.draw())
 
-handle = Handle('Желтый маркер')
-print(handle.draw())
+    handle = Handle('Желтый маркер')
+    print(handle.draw())

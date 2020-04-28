@@ -13,13 +13,14 @@ class Car:
     speed = 0
     color = ''
     name = ''
-    direction = ''
     is_police = False
+    _direction = ''
 
-    def __init__(self, speed: int, color: str, name: str):
+    def __init__(self, speed: int, color: str, name: str, is_police: bool):
         self.speed = speed
         self.color = color
         self.name = name
+        self.is_police = is_police
 
     def go(self):
         return f'машина {self.name} поехала'
@@ -28,8 +29,8 @@ class Car:
         return f'машина {self.name} остановилась'
 
     def turn(self, direction):
-        self.direction = direction
-        if self.direction == 'left':
+        self._direction = direction
+        if self._direction == 'left':
             return f'машина {self.name} повернула налево'
         else:
             return f'машина {self.name} повернула направо'
@@ -46,7 +47,7 @@ class TownCar(Car):
         self.color = color
         self.name = name
         self.is_police = False
-        super().__init__()
+        super().__init__(speed, color, name, self.is_police)
 
     def show_speed(self, speed):
         self.speed = speed
@@ -61,7 +62,8 @@ class SportCar(Car):
         self.speed = speed
         self.color = color
         self.name = name
-        super().__init__()
+        self.is_police = False
+        super().__init__(speed, color, name, self.is_police)
 
 
 class WorkCar(Car):
@@ -69,7 +71,8 @@ class WorkCar(Car):
         self.speed = speed
         self.color = color
         self.name = name
-        super().__init__()
+        self.is_police = False
+        super().__init__(speed, color, name, self.is_police)
 
     def show_speed(self, speed):
         self.speed = speed
@@ -85,12 +88,39 @@ class PoliceCar(Car):
         self.color = color
         self.name = name
         self.is_police = True
-        super().__init__()
+        super().__init__(speed, color, name, self.is_police)
 
 
-town_car = TownCar(speed=50, color='white', name='Ford Focus')
-town_car.go()
-town_car.stop()
-# town_car.turn('left')
-town_car.show_speed(55)
-town_car.show_speed(65)
+if __name__ == '__main__':
+    town_car = TownCar(speed=50, color='white', name='Ford Focus')
+    print('TownCar')
+    print(town_car.go())
+    print(town_car.stop())
+    print(town_car.turn('left'))
+    print(town_car.show_speed(55))
+    print(town_car.show_speed(65))
+
+    sport_car = SportCar(speed=100, color='red', name='Ford Mustang')
+    print('=============')
+    print('SportCar')
+    print(sport_car.go())
+    print(sport_car.stop())
+    print(sport_car.turn('right'))
+    print(sport_car.show_speed(200))
+
+    work_car = WorkCar(speed=30, color='green', name='Ford Fiesta')
+    print('=============')
+    print('WorkCar')
+    print(work_car.go())
+    print(work_car.stop())
+    print(work_car.turn('left'))
+    print(work_car.show_speed(40))
+    print(work_car.show_speed(50))
+
+    police_car = PoliceCar(speed=80, color='blue', name='Ford Explorer')
+    print('=============')
+    print('PoliceCar')
+    print(police_car.go())
+    print(police_car.stop())
+    print(police_car.turn('right'))
+    print(police_car.show_speed(100))
