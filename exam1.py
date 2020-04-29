@@ -7,7 +7,7 @@
 Подсказка: сложение элементов матриц выполнять поэлементно — первый элемент первой строки первой матрицы складываем с первым элементом первой строки второй матрицы и т.д.
 """
 
-from random import randint
+from my_module import my_func
 
 
 class Matrix:
@@ -28,25 +28,12 @@ class Matrix:
         return new_matrix
 
 
-def get_matrix_random_data(value_from: int, value_to: int, x_max: int, y_max: int) -> list:
-    """Создание списка списков случайными значениями
-
-    Arguments:
-        value_from {int} -- [description]
-        value_to {int} -- [description]
-        x_max {int} -- [description]
-        y_max {int} -- [description]
-
-    Returns:
-        list -- [description]
-    """
-    return [[randint(value_from, value_to) for x in range(x_max)] for y in range(y_max)]
-
-
 if __name__ == '__main__':
-    matrix_1 = Matrix([[randint(10, 20) for x in range(5)] for y in range(5)])
+    matrix_1 = Matrix(my_func.get_randomint_matrix(5, 5, 10, 20))
     print(matrix_1)
-    matrix_2 = Matrix([[randint(20, 30) for x in range(5)] for y in range(5)])
+
+    matrix_2 = Matrix(my_func.get_randomint_matrix(5, 5, 20, 30))
     print(matrix_2)
+
     matrix_3 = matrix_1 + matrix_2
     print(matrix_3)
