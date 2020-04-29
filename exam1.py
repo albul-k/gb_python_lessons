@@ -16,14 +16,15 @@ class TrafficLight:
     __color = ''
 
     def running(self):
-        dict_colors = {
-            'красный': 7,
-            'желтый': 2,
-            'зеленый': 2
-        }
-        for itm in cycle(dict_colors):
-            TrafficLight.__color = itm
-            sleep(dict_colors[itm])
+        tuple_colors = (
+            ('красный', 7),
+            ('желтый', 2),
+            ('зеленый', 2),
+            ('желтый', 2),
+        )
+        for itm in cycle(tuple_colors):
+            TrafficLight.__color = itm[0]
+            sleep(itm[1])
 
 
 my_traffic_light = TrafficLight()
