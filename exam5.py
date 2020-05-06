@@ -4,83 +4,94 @@
 """
 
 import uuid
+import os
+import json
 
 
 class Warehouse:
-    _quantity = 0
-    __stock = []
+    _items = []
 
     def __init__(self):
         pass
 
-    def add_item(self, department, quantity, data):
-        Warehouse._quantity += 1
-        Warehouse.__stock.append(
-            {'department': department, 'quantity': quantity, 'data': data})
+    def get_items(self):
+        return self._items
 
 
 class OfficeEquipment(Warehouse):
 
-    def __init__(self, manufacturer: str, isColor: bool, paper_size: str, capacity: int):
-        self.__id = str(uuid.uuid4())
-        self.__manufacturer = manufacturer
-        self.__isColor = isColor
-        self.__paper_size = paper_size
-        self.__capacity = capacity
+    def __init__(self, manufacturer: str, isColor: bool, paper_size: str, capacity: int, **kwargs):
+        self._equip_id = str(uuid.uuid4())
+        self._manufacturer = manufacturer
+        self._isColor = isColor
+        self._paper_size = paper_size
+        self._capacity = capacity
+
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+
+    @property
+    def equip_id(self):
+        return self._equip_id
 
     @property
     def manufacturer(self):
-        return self.__manufacturer
+        return self._manufacturer
 
     @property
     def isColor(self):
-        return self.__isColor
+        return self._isColor
 
     @property
     def paper_size(self):
-        return self.__paper_size
+        return self._paper_size
 
     @property
     def capacity(self):
-        return self.__capacity
+        return self._capacity
 
-    def get_item_data(self):
-        return {
-            'id': self.__id,
-            'manufacturer': self.__manufacturer,
-            'isColor': self.__isColor,
-            'paper_size': self.__paper_size,
-            'capacity': self.__capacity,
-        }
+    def add_item_to_warehouse(self, department: str, quantity: int):
+        super()._items.append({
+            'department': department,
+            'quantity': quantity,
+            'data': self.__dict__
+        })
 
 
 class Printer(OfficeEquipment):
 
-    def __init__(self, manufacturer, techology: str):
-        self.__techology = techology
-        super().__init__(manufacturer, isColor=True, paper_size='A4', capacity=20)
+    def __init__(self, manufacturer: str, techology: str):
+        super().__init__(manufacturer, True, 'A4', 20, _techology=techology)
 
 
 class Scaner(OfficeEquipment):
 
-    def __init__(self, manufacturer, resolution: str):
-        self.__resolution = resolution
-        super().__init__(manufacturer, isColor=True, paper_size='A4', capacity=1)
+    def __init__(self, manufacturer: str, resolution: str):
+        super().__init__(manufacturer, True, 'A4', 1, _resolution=resolution)
 
 
 class Xerox(OfficeEquipment):
 
-    def __init__(self, manufacturer, copy_speed: int):
-        self.__copy_speed = copy_speed
-        super().__init__(manufacturer, isColor=False, paper_size='A3', capacity=100)
+    def __init__(self, manufacturer: str, copy_speed: int):
+        super().__init__(manufacturer, False, 'A3', 100, _copy_speed=copy_speed)
 
 
 if __name__ == '__main__':
     my_printer = Printer('HP', 'laser')
-    my_printer.add_item('accounting', 5, my_printer.get_item_data())
+    my_printer.add_item_to_warehouse('accounting', 5)
 
     my_scanner = Scaner('Canon', '1000dpi')
-    my_scanner.add_item('sales', 10, my_scanner.get_item_data())
+    my_scanner.add_item_to_warehouse('sales', 10)
 
     my_xerox = Xerox('Epson', 50)
-    my_xerox.add_item('administration', 3, my_xerox.get_item_data())
+    my_xerox.add_item_to_warehouse('administration', 3)
+
+    file_output = 'exam5_output.json'
+    if os.path.exists(file_output):
+        os.remove(file_output)
+
+    try:
+        with open(file_output, 'w', encoding='UTF-8') as f_out:
+            json.dump(Warehouse().get_items(), f_out)
+    except IOError:
+        print("Произошла ошибка ввода/вывода файла")
